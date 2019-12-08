@@ -43,11 +43,28 @@ RUN apt-get update \
         r-cran-bibtex \
         r-cran-lubridate \
         r-cran-xml2
-
 # TODO merge
 RUN apt-get update \
     && apt-get install --yes --no-install-recommends \
-        python3-feather-format
+        python3-feather-format \
+        `# https://cran.r-project.org/web/packages/geojsonio/index.html` \
+        r-cran-maptools \
+        r-cran-rgdal \
+        r-cran-v8 \
+        `# geojson->geojsonio ` \
+        r-cran-lazyeval \
+        `# protolite->geojson->geojsonio` \
+        g++ \
+        libprotobuf-dev \
+        make
+RUN apt-get update \
+    && apt-get install --yes --no-install-recommends \
+        `# rgeos->geojsonio` \
+        libgeos-dev \
+        `# jqr->geojsonio` \
+        libjq-dev \
+        `# protolite->geojson->geojsonio` \
+        protobuf-compiler
 
 RUN chgrp staff /usr/local/bin `# meranctile` \
     && chmod g+ws /usr/local/bin \
@@ -56,6 +73,7 @@ USER notebook
 
 RUN pip3 install --system geoplot
 
+RUN Rscript -e 'install.packages("geojsonio")'
 RUN Rscript -e 'install.packages("eurostat")'
 
 VOLUME /home/notebook
