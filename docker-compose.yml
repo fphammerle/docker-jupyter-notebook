@@ -1,0 +1,13 @@
+version: '3'
+
+volumes:
+  home:
+
+services:
+  notebook:
+    build: .
+    ports: ['127.0.0.1:8888:8888']
+    volumes: ['home:/home/notebook:rw']
+    security_opt: ['no-new-privileges']
+
+# https://docs.docker.com/compose/compose-file
