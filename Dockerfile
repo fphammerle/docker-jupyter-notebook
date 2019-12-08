@@ -33,9 +33,36 @@ RUN apt-get update \
 RUN apt-get update \
     && apt-get install --yes --no-install-recommends \
         python3-distutils `# pyproj`
+RUN apt-get update \
+    && apt-get install --yes --no-install-recommends \
+        `# https://github.com/ResidentMario/geoplot/blob/master/setup.py` \
+        python3-cartopy \
+        python3-descartes \
+        python3-matplotlib \
+        python3-pip \
+        python3-seaborn \
+        python3-setuptools
+RUN apt-get update \
+    && apt-get install --yes --no-install-recommends \
+        `# https://github.com/ResidentMario/geoplot/blob/master/setup.py` \
+        python3-wheel
+RUN apt-get update \
+    && apt-get install --yes --no-install-recommends \
+        `# mapclassify->geoplot` \
+        python3-deprecated \
+        `# contextily->geoplot` \
+        python3-geopy \
+        python3-joblib \
+        python3-pillow \
+        python3-rasterio \
+        python3-requests
 
-RUN useradd --create-home --groups staff notebook
+RUN chgrp staff /usr/local/bin `# meranctile` \
+    && chmod g+ws /usr/local/bin \
+    && useradd --create-home --groups staff notebook
 USER notebook
+
+RUN pip3 install --system geoplot
 
 RUN Rscript -e 'install.packages("eurostat")'
 
