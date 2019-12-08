@@ -23,6 +23,17 @@ RUN apt-get update \
         r-cran-lubridate \
         r-cran-xml2
 
+# TODO merge
+RUN apt-get update \
+    && apt-get install --yes --no-install-recommends \
+        curl \
+        python3-geopandas \
+        python3-xlrd \
+        unzip
+RUN apt-get update \
+    && apt-get install --yes --no-install-recommends \
+        python3-distutils `# pyproj`
+
 RUN useradd --create-home --groups staff notebook
 USER notebook
 
