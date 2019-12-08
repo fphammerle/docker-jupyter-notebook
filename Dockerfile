@@ -2,8 +2,29 @@ FROM debian:bullseye
 
 RUN apt-get update \
     && apt-get install --yes --no-install-recommends \
+        curl \
         jupyter-notebook \
+        python3-distutils `# pyproj` \
+        python3-geopandas \
+        python3-xlrd \
         r-cran-irkernel \
+        unzip \
+        `# https://github.com/ResidentMario/geoplot/blob/master/setup.py` \
+        python3-cartopy \
+        python3-descartes \
+        python3-matplotlib \
+        python3-pip \
+        python3-seaborn \
+        python3-setuptools \
+        python3-wheel \
+        `# mapclassify->geoplot` \
+        python3-deprecated \
+        `# contextily->geoplot` \
+        python3-geopy \
+        python3-joblib \
+        python3-pillow \
+        python3-rasterio \
+        python3-requests \
         `# https://github.com/rOpenGov/eurostat/blob/master/DESCRIPTION` \
         r-cran-broom \
         r-cran-classint \
@@ -22,40 +43,6 @@ RUN apt-get update \
         r-cran-bibtex \
         r-cran-lubridate \
         r-cran-xml2
-
-# TODO merge
-RUN apt-get update \
-    && apt-get install --yes --no-install-recommends \
-        curl \
-        python3-geopandas \
-        python3-xlrd \
-        unzip
-RUN apt-get update \
-    && apt-get install --yes --no-install-recommends \
-        python3-distutils `# pyproj`
-RUN apt-get update \
-    && apt-get install --yes --no-install-recommends \
-        `# https://github.com/ResidentMario/geoplot/blob/master/setup.py` \
-        python3-cartopy \
-        python3-descartes \
-        python3-matplotlib \
-        python3-pip \
-        python3-seaborn \
-        python3-setuptools
-RUN apt-get update \
-    && apt-get install --yes --no-install-recommends \
-        `# https://github.com/ResidentMario/geoplot/blob/master/setup.py` \
-        python3-wheel
-RUN apt-get update \
-    && apt-get install --yes --no-install-recommends \
-        `# mapclassify->geoplot` \
-        python3-deprecated \
-        `# contextily->geoplot` \
-        python3-geopy \
-        python3-joblib \
-        python3-pillow \
-        python3-rasterio \
-        python3-requests
 
 RUN chgrp staff /usr/local/bin `# meranctile` \
     && chmod g+ws /usr/local/bin \
