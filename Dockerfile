@@ -2,7 +2,8 @@ FROM debian:bullseye
 
 RUN apt-get update \
     && apt-get install --yes --no-install-recommends \
-        jupyter-notebook
+        jupyter-notebook \
+        r-cran-irkernel
 
 RUN useradd --create-home notebook
 USER notebook
