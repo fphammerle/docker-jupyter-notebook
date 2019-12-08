@@ -44,6 +44,11 @@ RUN apt-get update \
         r-cran-lubridate \
         r-cran-xml2
 
+# TODO merge
+RUN apt-get update \
+    && apt-get install --yes --no-install-recommends \
+        python3-feather-format
+
 RUN chgrp staff /usr/local/bin `# meranctile` \
     && chmod g+ws /usr/local/bin \
     && useradd --create-home --groups staff notebook
